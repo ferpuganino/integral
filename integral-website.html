@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>∫ntegral — Marketing & Diseño</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #F07A2A;
+    --purple: #6B35C8;
+    --mid: #A855A0;
+    --white: #FFFFFF;
+    --light: #F5F0FF;
+    --dark: #0D0818;
+    --grad: linear-gradient(135deg, #F07A2A 0%, #A855A0 50%, #6B35C8 100%);
+    --grad-text: linear-gradient(90deg, #F07A2A 0%, #6B35C8 100%);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(13,8,24,0.72);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nav-logo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800; font-size: 1.6rem;
+    background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.02em; transition: color .2s; }
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--grad); color: var(--white); text-decoration: none;
+    padding: .6rem 1.4rem; border-radius: 50px; font-weight: 600; font-size: 0.88rem;
+    transition: opacity .2s, transform .2s;
+  }
+  .nav-cta:hover { opacity: .85; transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: var(--grad);
+    opacity: .12;
+  }
+
+  .hero-blob {
+    position: absolute; border-radius: 50%; filter: blur(80px); opacity: .35;
+  }
+  .blob1 { width: 600px; height: 600px; background: var(--orange); top: -150px; left: -200px; animation: float 8s ease-in-out infinite; }
+  .blob2 { width: 500px; height: 500px; background: var(--purple); bottom: -100px; right: -150px; animation: float 10s ease-in-out infinite reverse; }
+  .blob3 { width: 300px; height: 300px; background: var(--mid); top: 40%; left: 55%; animation: float 12s ease-in-out infinite; }
+
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-30px)} }
+
+  .hero-content { position: relative; z-index: 1; max-width: 820px; }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: .4rem 1.2rem;
+    font-size: .8rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+    color: rgba(255,255,255,.75);
+    margin-bottom: 1.5rem;
+    animation: fadeUp .8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800; font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1.05; letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp .8s .15s ease both;
+  }
+
+  .hero h1 span {
+    background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  .hero p {
+    font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 300;
+    color: rgba(255,255,255,.7); max-width: 560px; margin: 0 auto 2.5rem;
+    line-height: 1.7;
+    animation: fadeUp .8s .3s ease both;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp .8s .45s ease both; }
+
+  .btn-primary {
+    background: var(--grad); color: var(--white); text-decoration: none;
+    padding: .9rem 2rem; border-radius: 50px; font-weight: 600; font-size: 1rem;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 8px 30px rgba(240,122,42,.3);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(240,122,42,.4); }
+
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,.3); color: var(--white); text-decoration: none;
+    padding: .9rem 2rem; border-radius: 50px; font-weight: 500; font-size: 1rem;
+    transition: border-color .2s, background .2s;
+  }
+  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.06); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 6rem 2rem; }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--orange); margin-bottom: .75rem;
+  }
+
+  .section-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800; font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1; margin-bottom: 1rem;
+  }
+
+  .section-title span { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+  .section-sub { color: rgba(255,255,255,.6); font-size: 1rem; font-weight: 300; max-width: 520px; line-height: 1.7; }
+
+  /* ─── PRESENCIA ─── */
+  #presencia { background: rgba(255,255,255,.02); }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+
+  .plan-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 24px;
+    padding: 2rem;
+    position: relative; overflow: hidden;
+    transition: transform .3s, border-color .3s, box-shadow .3s;
+  }
+  .plan-card:hover { transform: translateY(-6px); border-color: rgba(240,122,42,.4); box-shadow: 0 20px 50px rgba(240,122,42,.12); }
+
+  .plan-card.featured {
+    background: var(--grad);
+    border-color: transparent;
+  }
+  .plan-card.featured:hover { box-shadow: 0 20px 60px rgba(107,53,200,.4); }
+
+  .plan-card.featured .plan-price,
+  .plan-card.featured .plan-feature { color: var(--white); }
+  .plan-card.featured .plan-feature-label { color: rgba(255,255,255,.7); }
+
+  .plan-tag {
+    display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; padding: .3rem .8rem; border-radius: 50px;
+    background: rgba(255,255,255,.15); color: var(--white); margin-bottom: 1.2rem;
+  }
+  .plan-card:not(.featured) .plan-tag { background: rgba(240,122,42,.15); color: var(--orange); }
+
+  .plan-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800; font-size: 1.4rem; margin-bottom: .3rem;
+  }
+
+  .plan-platforms {
+    font-size: .8rem; color: rgba(255,255,255,.55); margin-bottom: 1.5rem; font-weight: 500;
+  }
+  .plan-card.featured .plan-platforms { color: rgba(255,255,255,.75); }
+
+  .plan-price {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800; font-size: 2.4rem;
+    color: var(--orange); margin-bottom: .2rem;
+  }
+  .plan-price-note { font-size: .8rem; color: rgba(255,255,255,.4); margin-bottom: 1.5rem; }
+  .plan-card.featured .plan-price-note { color: rgba(255,255,255,.6); }
+
+  .plan-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 1.2rem 0; }
+
+  .plan-feature { display: flex; justify-content: space-between; align-items: center; padding: .5rem 0; }
+  .plan-feature-label { font-size: .85rem; color: rgba(255,255,255,.5); }
+  .plan-feature-value { font-size: .85rem; font-weight: 600; color: var(--white); text-align: right; }
+
+  .plan-btn {
+    display: block; width: 100%; text-align: center; text-decoration: none;
+    padding: .85rem; border-radius: 50px; font-weight: 700; font-size: .9rem;
+    margin-top: 1.8rem; transition: opacity .2s, transform .2s;
+  }
+  .plan-btn:hover { opacity: .85; transform: translateY(-2px); }
+  .plan-card:not(.featured) .plan-btn { background: var(--grad); color: var(--white); }
+  .plan-card.featured .plan-btn { background: rgba(255,255,255,.95); color: var(--dark); }
+
+  /* ─── CRECIMIENTO ─── */
+  #crecimiento { }
+
+  /* ─── ADICIONALES ─── */
+  #adicionales { background: rgba(255,255,255,.02); }
+
+  .addons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+
+  .addon-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 24px; padding: 2rem;
+    transition: transform .3s, border-color .3s;
+  }
+  .addon-card:hover { transform: translateY(-5px); border-color: rgba(107,53,200,.4); }
+
+  .addon-icon {
+    width: 50px; height: 50px; border-radius: 14px;
+    background: var(--grad); display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 1.2rem;
+  }
+
+  .addon-name { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.15rem; margin-bottom: .5rem; }
+  .addon-desc { font-size: .88rem; color: rgba(255,255,255,.55); line-height: 1.6; margin-bottom: 1.2rem; }
+
+  .addon-list { list-style: none; margin-bottom: 1.4rem; }
+  .addon-list li {
+    font-size: .83rem; color: rgba(255,255,255,.65); padding: .35rem 0;
+    padding-left: 1.2rem; position: relative;
+  }
+  .addon-list li::before { content: '→'; position: absolute; left: 0; color: var(--orange); }
+
+  .addon-price {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800; font-size: 1.5rem; color: var(--orange);
+  }
+  .addon-price span { font-size: .8rem; font-weight: 400; color: rgba(255,255,255,.4); }
+
+  /* ─── GOOD TO KNOW ─── */
+  #goodtoknow { }
+
+  .gtk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+
+  .gtk-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 20px; padding: 1.8rem;
+  }
+
+  .gtk-num {
+    font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 3rem;
+    background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    line-height: 1; margin-bottom: .8rem;
+  }
+
+  .gtk-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: .6rem; }
+  .gtk-text { font-size: .88rem; color: rgba(255,255,255,.55); line-height: 1.6; }
+
+  /* ─── PASOS ─── */
+  #pasos { background: rgba(255,255,255,.02); }
+
+  .steps { display: flex; gap: 2rem; margin-top: 3rem; flex-wrap: wrap; }
+
+  .step {
+    flex: 1; min-width: 220px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 20px; padding: 1.8rem;
+    position: relative;
+  }
+
+  .step-num {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--grad); display: flex; align-items: center; justify-content: center;
+    font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .step-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: .5rem; }
+  .step-text { font-size: .85rem; color: rgba(255,255,255,.55); line-height: 1.6; }
+
+  .step-connector {
+    display: flex; align-items: center; color: rgba(255,255,255,.2); font-size: 1.5rem; padding-top: 2rem;
+  }
+
+  /* ─── CTA ─── */
+  .cta-section {
+    padding: 6rem 2rem;
+    text-align: center;
+    background: var(--grad);
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .cta-content { position: relative; z-index: 1; }
+  .cta-section h2 { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 1rem; }
+  .cta-section p { font-size: 1.1rem; opacity: .85; margin-bottom: 2rem; font-weight: 300; }
+  .cta-contacts { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+  .cta-contact { display: flex; align-items: center; gap: .5rem; font-weight: 600; color: var(--white); text-decoration: none; font-size: 1rem; opacity: .9; }
+  .cta-contact:hover { opacity: 1; }
+  .btn-white {
+    background: var(--white); color: var(--dark); text-decoration: none;
+    padding: 1rem 2.5rem; border-radius: 50px; font-weight: 700; font-size: 1rem;
+    display: inline-block; transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 8px 30px rgba(0,0,0,.2);
+  }
+  .btn-white:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,.3); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: rgba(255,255,255,.03);
+    border-top: 1px solid rgba(255,255,255,.06);
+    padding: 2.5rem 4rem;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: gap;
+    gap: 1rem;
+  }
+  .footer-logo { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.3rem; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .footer-text { font-size: .8rem; color: rgba(255,255,255,.3); }
+
+  /* ─── TABS ─── */
+  .tabs { display: flex; gap: .75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .tab-btn {
+    border: 1px solid rgba(255,255,255,.15); background: transparent; color: rgba(255,255,255,.6);
+    padding: .55rem 1.3rem; border-radius: 50px; font-size: .88rem; font-weight: 600;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all .2s;
+  }
+  .tab-btn.active { background: var(--grad); border-color: transparent; color: var(--white); }
+  .tab-btn:hover:not(.active) { border-color: rgba(255,255,255,.35); color: var(--white); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.2rem; }
+    footer { flex-direction: column; text-align: center; padding: 2rem 1.2rem; }
+    .steps { flex-direction: column; }
+    .step-connector { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">∫ntegral</a>
+  <ul class="nav-links">
+    <li><a href="#presencia">Presencia</a></li>
+    <li><a href="#crecimiento">Crecimiento</a></li>
+    <li><a href="#adicionales">Adicionales</a></li>
+    <li><a href="#goodtoknow">Info</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Empezar Ahora</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+  <div class="hero-blob blob3"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ Marketing & Diseño — Tampico, Tamaulipas</div>
+    <h1>Tu marca, <span>amplificada.</span></h1>
+    <p>Estrategia de contenido, diseño visual y gestión de redes sociales para profesionistas y negocios que quieren crecer en el mundo digital.</p>
+    <div class="hero-actions">
+      <a href="#presencia" class="btn-primary">Ver Paquetes</a>
+      <a href="#contacto" class="btn-outline">Contactar Ahora</a>
+    </div>
+  </div>
+</section>
+
+<!-- PAQUETES PRESENCIA -->
+<section id="presencia">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Paquetes Presencia</div>
+      <h2 class="section-title">Construye tu <span>presencia digital</span></h2>
+      <p class="section-sub">Gestión de contenido en redes sociales con diseño profesional y estrategia definida a tu medida.</p>
+    </div>
+    <div class="plans-grid reveal" style="transition-delay:.15s">
+
+      <div class="plan-card">
+        <div class="plan-tag">Básico</div>
+        <div class="plan-name">Presencia Profesional</div>
+        <div class="plan-platforms">📱 Instagram & Facebook</div>
+        <div class="plan-price">$4,400</div>
+        <div class="plan-price-note">por mes</div>
+        <hr class="plan-divider">
+        <div class="plan-feature"><span class="plan-feature-label">Contenido mensual</span><span class="plan-feature-value">8 Posts + 2 Videos</span></div>
+        <div class="plan-feature"><span class="plan-feature-label">Fotografía en sitio</span><span class="plan-feature-value">Sin visitas</span></div>
+        <div class="plan-feature"><span class="plan-feature-label">Gestión</span><span class="plan-feature-value">Publicación</span></div>
+        <a href="#contacto" class="plan-btn">Seleccionar</a>
+      </div>
+
+      <div class="plan-card featured">
+        <div class="plan-tag">⭐ Recomendado</div>
+        <div class="plan-name">Autoridad Digital</div>
+        <div class="plan-platforms">📱 Instagram, Facebook & TikTok</div>
+        <div class="plan-price">$7,600</div>
+        <div class="plan-price-note">por mes</div>
+        <hr class="plan-divider">
+        <div class="plan-feature"><span class="plan-feature-label">Contenido mensual</span><span class="plan-feature-value">12 Posts + 4 Videos</span></div>
+        <div class="plan-feature"><span class="plan-feature-label">Fotografía en sitio</span><span class="plan-feature-value">2 Visitas</span></div>
+        <div class="plan-feature"><span class="plan-feature-label">Gestión</span><span class="plan-feature-value">Publicación + Reporte</span></div>
+        <a href="#contacto" class="plan-btn">Seleccionar</a>
+      </div>
+
+      <div class="plan-card">
+        <div class="plan-tag">Premium</div>
+        <div class="plan-name">Liderazgo Estratégico</div>
+        <div class="plan-platforms">📱 Instagram, Facebook & TikTok</div>
+        <div class="plan-price">$11,400</div>
+        <div class="plan-price-note">por mes</div>
+        <hr class="plan-divider">
+        <div class="plan-feature"><span class="plan-feature-label">Contenido mensual</span><span class="plan-feature-value">16 Posts + 6 Videos</span></div>
+        <div class="plan-feature"><span class="plan-feature-label">Fotografía en sitio</span><span class="plan-feature-value">4 Visitas</span></div>
+        <div class="plan-feature"><span class="plan-feature-label">Gestión</span><span class="plan-feature-value">Publicación + Reporte + Community Mgmt</span></div>
+        <a href="#contacto" class="plan-btn">Seleccionar</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PAQUETES CRECIMIENTO -->
+<section id="crecimiento">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Paquetes Crecimiento</div>
+      <h2 class="section-title">Acelera tu <span>crecimiento digital</span></h2>
+      <p class="section-sub">Más que publicar: redactamos, gestionamos anuncios y ejecutamos email marketing para que tu negocio escale.</p>
+    </div>
+    <div class="plans-grid reveal" style="transition-delay:.15s">
+
+      <div class="plan-card">
+        <div class="plan-tag">Esencial</div>
+        <div class="plan-name">Presencia Digital</div>
+        <div class="plan-platforms">📱 Instagram & Facebook</div>
+        <div class="plan-price">$5,000</div>
+        <div class="plan-price-note">por mes</div>
+        <hr class="plan-divider">
+        <div class="plan-feature"><span class="plan-feature-label">Contenido mensual</span><span class="plan-feature-value">8 Posts + 2 Videos</span></div>
+        <div class="plan-feature"><span class="plan-feature-label">Fotografía en sitio</span><span class="plan-feature-value">Sin visitas</span></div>
+        <div class="plan-feature"><span class="plan-feature-label">Gestión</span><span class="plan-feature-value">Copies + Publicación + Reporte</span></div>
+        <a href="#contacto" class="plan-btn">Seleccionar</a>
+      </div>
+
+      <div class="plan-card featured">
+        <div class="plan-tag">⭐ Recomendado</div>
+        <div class="plan-name">Crecimiento Acelerado</div>
+        <div class="plan-platforms">📱 Instagram, Facebook & TikTok</div>
+        <div class="plan-price">$10,000</div>
+        <div class="plan-price-note">por mes</div>
+        <hr class="plan-divider">
+        <div class="plan-feature"><span class="plan-feature-label">Contenido mensual</span><span class="plan-feature-value">12 Posts + 4 Videos</span></div>
+        <div class="plan-feature"><span class="plan-feature-label">Fotografía en sitio</span><span class="plan-feature-value">2 Visitas</span></div>
+        <div class="plan-feature"><span class="plan-feature-label">Gestión</span><span class="plan-feature-value">Community Mgmt + Reporte Detallado</span></div>
+        <a href="#contacto" class="plan-btn">Seleccionar</a>
+      </div>
+
+      <div class="plan-card">
+        <div class="plan-tag">Todo Incluido</div>
+        <div class="plan-name">Manejo Premium</div>
+        <div class="plan-platforms">📱 Instagram, Facebook & TikTok</div>
+        <div class="plan-price">$20,000</div>
+        <div class="plan-price-note">por mes</div>
+        <hr class="plan-divider">
+        <div class="plan-feature"><span class="plan-feature-label">Contenido mensual</span><span class="plan-feature-value">20 Posts + 8 Videos</span></div>
+        <div class="plan-feature"><span class="plan-feature-label">Fotografía en sitio</span><span class="plan-feature-value">4 Visitas</span></div>
+        <div class="plan-feature"><span class="plan-feature-label">Gestión</span><span class="plan-feature-value">Anuncios + Email Marketing</span></div>
+        <a href="#contacto" class="plan-btn">Seleccionar</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ADICIONALES -->
+<section id="adicionales">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Servicios Adicionales</div>
+      <h2 class="section-title">Diseño que <span>te representa</span></h2>
+      <p class="section-sub">Pagos únicos para establecer las bases visuales y de identidad de tu marca o negocio.</p>
+    </div>
+    <div class="addons-grid reveal" style="transition-delay:.15s">
+
+      <div class="addon-card">
+        <div class="addon-icon">🎨</div>
+        <div class="addon-name">Diseño de Identidad Visual</div>
+        <div class="addon-desc">El ADN visual y estratégico de tu marca personal. La base de toda comunicación.</div>
+        <ul class="addon-list">
+          <li>Logotipo tipográfico o monograma</li>
+          <li>Paleta de color profesional</li>
+          <li>Selección tipográfica y jerarquía</li>
+          <li>Mini Manual de Marca (PDF)</li>
+        </ul>
+        <div class="addon-price">$4,000 <span>pago único</span></div>
+      </div>
+
+      <div class="addon-card">
+        <div class="addon-icon">📄</div>
+        <div class="addon-name">Diseño de Papelería Profesional</div>
+        <div class="addon-desc">Materiales de contacto y comunicación con identidad visual coherente.</div>
+        <ul class="addon-list">
+          <li>Tarjeta de presentación</li>
+          <li>Hoja membretada</li>
+          <li>Plantilla de presentación</li>
+          <li>Firma de correo electrónico</li>
+        </ul>
+        <div class="addon-price">$3,000 <span>pago único</span></div>
+      </div>
+
+      <div class="addon-card">
+        <div class="addon-icon">🚀</div>
+        <div class="addon-name">Business Starter Pack</div>
+        <div class="addon-desc">Para nuevos negocios o marcas que buscan un rebranding completo.</div>
+        <ul class="addon-list">
+          <li>Creación de páginas en redes sociales</li>
+          <li>Identidad visual básica</li>
+          <li>5 plantillas para posts</li>
+          <li>5 plantillas para historias</li>
+        </ul>
+        <div class="addon-price">$7,000 <span>pago único</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GOOD TO KNOW -->
+<section id="goodtoknow">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Good to Know</div>
+      <h2 class="section-title">Lo que debes <span>saber</span></h2>
+    </div>
+    <div class="gtk-grid reveal" style="transition-delay:.1s">
+      <div class="gtk-card">
+        <div class="gtk-num">01</div>
+        <div class="gtk-title">Modalidad de Pago</div>
+        <div class="gtk-text">El servicio se divide en 4 pagos semanales, cada uno por adelantado los días lunes, cubriendo los siguientes 7 días para garantizar continuidad.</div>
+      </div>
+      <div class="gtk-card">
+        <div class="gtk-num">02</div>
+        <div class="gtk-title">Traslados sin costo</div>
+        <div class="gtk-text">Los paquetes con visitas presenciales incluyen todos los costos de traslado y viáticos dentro de la Zona Conurbada de Tampico.</div>
+      </div>
+      <div class="gtk-card">
+        <div class="gtk-num">03</div>
+        <div class="gtk-title">Material Audiovisual</div>
+        <div class="gtk-text">Para el paquete básico (sin visitas), el cliente proporciona el material de video y fotografía en crudo con la calidad adecuada para edición.</div>
+      </div>
+      <div class="gtk-card">
+        <div class="gtk-num">04</div>
+        <div class="gtk-title">Aprobación de Contenido</div>
+        <div class="gtk-text">Todo el contenido se envía para revisión y aprobación con 24 horas de anticipación para cumplir puntualmente con el calendario.</div>
+      </div>
+      <div class="gtk-card">
+        <div class="gtk-num">05</div>
+        <div class="gtk-title">Estrategia en Conjunto</div>
+        <div class="gtk-text">Los pilares de contenido y la estrategia se definen juntos al inicio. El calendario quincenal se propone basado en esa dirección acordada.</div>
+      </div>
+      <div class="gtk-card">
+        <div class="gtk-num">06</div>
+        <div class="gtk-title">Compromiso Inicial</div>
+        <div class="gtk-text">Se recomienda un período de colaboración de 3 meses para que la estrategia se asiente y los resultados sean claramente visibles.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PASOS -->
+<section id="pasos">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Siguientes Pasos</div>
+      <h2 class="section-title">Empezar es <span>más sencillo</span> de lo que crees</h2>
+    </div>
+    <div class="steps reveal" style="transition-delay:.1s">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Revisa y selecciona</div>
+        <div class="step-text">Elige el paquete que mejor se adapte a tus objetivos y presupuesto.</div>
+      </div>
+      <div class="step-connector">→</div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Reunión inicial</div>
+        <div class="step-text">Agendamos una sesión para definir tu línea de comunicación y estrategia de contenido.</div>
+      </div>
+      <div class="step-connector">→</div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">¡A crecer!</div>
+        <div class="step-text">Comenzamos a construir y fortalecer tu presencia digital desde el primer día.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contacto">
+  <div class="cta-content">
+    <h2>¿Listo para dar el siguiente paso?</h2>
+    <p>Hablemos de tu marca y de cómo llevarla al siguiente nivel.</p>
+    <div class="cta-contacts">
+      <a href="tel:8331064290" class="cta-contact">📞 (833) 106 4290</a>
+      <a href="mailto:ferpuga04@gmail.com" class="cta-contact">✉️ ferpuga04@gmail.com</a>
+    </div>
+    <a href="mailto:ferpuga04@gmail.com" class="btn-white">Escribir Ahora</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">∫ntegral</div>
+  <div class="footer-text">Marketing & Diseño — Por Fer Puga Niño · Tampico, Tamaulipas</div>
+  <div class="footer-text">© 2025 ∫ntegral. Todos los derechos reservados.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
